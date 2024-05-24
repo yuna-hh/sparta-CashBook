@@ -1,12 +1,8 @@
 import "./reset.css";
-import HomePage from "./components/HomePage";
+import Router from "./shared/Router";
 
 function App() {
-  return (
-    <>
-      <HomePage />
-    </>
-  );
+  return <Router />;
 }
 
 export default App;

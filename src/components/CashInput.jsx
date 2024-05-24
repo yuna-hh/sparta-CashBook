@@ -56,7 +56,6 @@ const CashInput = ({ setCashArray, setClickMonth }) => {
       contents,
     };
     setClickMonth(newItem.month);
-    console.log(setClickMonth(newItem.month));
     setCashArray((prev) => [...prev, newItem]);
   };
 

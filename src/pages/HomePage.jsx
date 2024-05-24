@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
-import CashList from "./CashList";
-import Monthly from "./Monthly";
-import CashInput from "./CashInput";
+import CashList from "../components/CashList";
+import Monthly from "../components/Monthly";
+import CashInput from "../components/CashInput";
 
 const StLayout = styled.div`
   display: flex;
@@ -15,10 +14,7 @@ const StLayout = styled.div`
   padding: 30px 0;
   box-sizing: border-box;
 `;
-const HomePage = () => {
-  const [cashArray, setCashArray] = useState([]);
-  const [clickMonth, setClickMonth] = useState(1);
-  console.log(clickMonth);
+const HomePage = ({ cashArray, setCashArray, clickMonth, setClickMonth }) => {
   return (
     <>
       <StLayout>

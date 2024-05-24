@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StListLi = styled.li`
@@ -31,20 +32,23 @@ const CashItem = ({ cashArray, clickMonth }) => {
   const filteredMonth = cashArray.filter((item) => {
     return clickMonth === item.month;
   });
+  console.log(cashArray);
   return (
     <>
       {filteredMonth.map((item) => {
         return (
-          <StListLi key={item.id}>
-            <div>
-              <StDate>{item.date}</StDate>
-              <StSpanDiv>
-                <span>{item.category} - </span>
-                <span>{item.contents}</span>
-              </StSpanDiv>
-            </div>
-            <StPrice> ✔️ {item.price}</StPrice>
-          </StListLi>
+          <Link to={`/detail/${item.id}`} key={item.id}>
+            <StListLi>
+              <div>
+                <StDate>{item.date}</StDate>
+                <StSpanDiv>
+                  <span>{item.category} - </span>
+                  <span>{item.contents}</span>
+                </StSpanDiv>
+              </div>
+              <StPrice> ✔️ {item.price}</StPrice>
+            </StListLi>
+          </Link>
         );
       })}
     </>
