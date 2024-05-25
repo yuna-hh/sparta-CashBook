@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { ContextProvider } from "../context/ContextProvider";
+import { useContext } from "react";
 
 const StBtnBox = styled.div`
   display: grid;
@@ -21,7 +23,8 @@ const StBtn = styled.button`
   cursor: pointer;
 `;
 
-const Monthly = ({ setClickMonth, clickMonth }) => {
+const Monthly = () => {
+  const { setClickMonth, clickMonth } = useContext(ContextProvider);
   const monthClickHandler = (num) => {
     setClickMonth(num);
   };

@@ -13,10 +13,10 @@ const StListUl = styled.ul`
   background-color: #fff;
   gap: 20px;
 `;
-const CashList = ({ cashArray, clickMonth }) => {
+const CashList = () => {
   return (
     <StListUl>
-      <CashItem cashArray={cashArray} clickMonth={clickMonth} />
+      <CashItem />
     </StListUl>
   );
 };
