@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import { ContextProvider } from "../context/ContextProvider";
+import { useContext } from "react";
 
 const StDetailBox = styled.div`
   width: 1200px;
@@ -58,7 +60,8 @@ const StBtnWrap = styled.div`
   }
 `;
 
-const Detail = ({ cashArray, setClickMonth, setCashArray }) => {
+const Detail = () => {
+  const { cashArray, setCashArray } = useContext(ContextProvider);
   const navigate = useNavigate();
   const { detailId } = useParams();
   // console.log("params", params);

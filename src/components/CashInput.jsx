@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import { ContextProvider } from "../context/ContextProvider";
+import { useContext } from "react";
 
 const Stform = styled.form`
   display: flex;
@@ -38,7 +40,8 @@ const Stform = styled.form`
     cursor: pointer;
   }
 `;
-const CashInput = ({ setCashArray, setClickMonth }) => {
+const CashInput = () => {
+  const { setCashArray, setClickMonth } = useContext(ContextProvider);
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [contents, setContents] = useState("");

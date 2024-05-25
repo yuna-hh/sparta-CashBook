@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ContextProvider } from "../context/ContextProvider";
+import { useContext } from "react";
 
 const StListLi = styled.li`
   display: flex;
@@ -28,7 +30,8 @@ const StPrice = styled.div`
   font-size: 22px;
 `;
 
-const CashItem = ({ cashArray, clickMonth }) => {
+const CashItem = () => {
+  const { cashArray, clickMonth } = useContext(ContextProvider);
   const filteredMonth = cashArray.filter((item) => {
     return clickMonth === item.month;
   });
