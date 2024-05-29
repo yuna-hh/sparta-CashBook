@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ContextProvider } from "../context/ContextProvider";
-import { useContext } from "react";
+// import { ContextProvider } from "../context/ContextProvider";
+// import { useContext } from "react";
 
 const StListLi = styled.li`
   display: flex;
@@ -31,7 +32,9 @@ const StPrice = styled.div`
 `;
 
 const CashItem = () => {
-  const { cashArray, clickMonth } = useContext(ContextProvider);
+  const cashArray = useSelector((state) => state.cashbook.list);
+  const clickMonth = useSelector((state) => state.cashbook.month);
+  // const { cashArray, clickMonth } = useContext(ContextProvider);
   const filteredMonth = cashArray.filter((item) => {
     return clickMonth === item.month;
   });

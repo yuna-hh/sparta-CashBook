@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
-import { ContextProvider } from "../context/ContextProvider";
-import { useContext } from "react";
+import styled from "styled-components";
+import { deleteCashList, editCashList } from "../store/slices/cashBookSlice";
+// import { ContextProvider } from "../context/ContextProvider";
+// import { useContext } from "react";
 
 const StDetailBox = styled.div`
   width: 1200px;
@@ -61,7 +63,9 @@ const StBtnWrap = styled.div`
 `;
 
 const Detail = () => {
-  const { cashArray, setCashArray } = useContext(ContextProvider);
+  const dispatch = useDispatch();
+  const cashArray = useSelector((state) => state.cashbook.list);
+  // const { cashArray, setCashArray } = useContext(ContextProvider);
   const navigate = useNavigate();
   const { detailId } = useParams();
   // console.log("params", params);
@@ -77,29 +81,27 @@ const Detail = () => {
   const handleEditeBtn = () => {
     const monthArray = detailDate.split("-");
     const editItem = {
-      id,
+      id: id,
       date: detailDate,
       category: detailCategory,
       price: detailPrice,
       contents: detailContents,
       month: Number(monthArray[1]),
     };
-    setCashArray((prev) => {
-      return prev.map((item) => {
-        if (item.id === detailId) {
-          return editItem;
-        }
-        return item;
-      });
-    });
+    // setCashArray((prev) => {
+    //   return prev.map((item) => {
+    //     if (item.id === detailId) {
+    //       return editItem;
+    //     }
+    //     return item;
+    //   });
+    // });
+    dispatch(editCashList(editItem));
     navigate("/");
   };
 
   const handleDelteBtn = () => {
-    const filteredArray = cashArray.filter((item) => {
-      return item.id !== detailId;
-    });
-    setCashArray(filteredArray);
+    dispatch(deleteCashList(detailId));
     navigate("/");
   };
 

@@ -1,7 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styled from "styled-components";
-import { ContextProvider } from "../context/ContextProvider";
-import { useContext } from "react";
+import { setMonth } from "../store/slices/cashBookSlice";
+// import { ContextProvider } from "../context/ContextProvider";
+// import { useContext } from "react";
 
 const StBtnBox = styled.div`
   display: grid;
@@ -24,9 +27,12 @@ const StBtn = styled.button`
 `;
 
 const Monthly = () => {
-  const { setClickMonth, clickMonth } = useContext(ContextProvider);
+  const dispatch = useDispatch(); // setclickMonth
+  const clickMonth = useSelector((state) => state.cashbook.month);
+  // clickMonth
+  // const { setClickMonth, clickMonth } = useContext(ContextProvider);
   const monthClickHandler = (num) => {
-    setClickMonth(num);
+    dispatch(setMonth(num));
   };
   const month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
@@ -37,6 +43,7 @@ const Monthly = () => {
             monthClickHandler(num);
           }}
           key={num}
+          // 이름 똑같이 줘서 그냥 냅둔거임
           $active={num === clickMonth} //해당하는 월
         >
           {num}
