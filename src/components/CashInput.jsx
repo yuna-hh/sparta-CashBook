@@ -2,8 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import { ContextProvider } from "../context/ContextProvider";
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { addCashList, setMonth } from "../store/slices/cashBookSlice";
+// import { ContextProvider } from "../context/ContextProvider";
+// import { useContext } from "react";
 
 const Stform = styled.form`
   display: flex;
@@ -41,14 +43,23 @@ const Stform = styled.form`
   }
 `;
 const CashInput = () => {
-  const { setCashArray, setClickMonth } = useContext(ContextProvider);
+  const dispatch = useDispatch();
+  // const { setCashArray, setClickMonth } = useContext(ContextProvider);
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [contents, setContents] = useState("");
   const [date, setDate] = useState("");
-
+  const validation = () => {
+    if (!category || !price || !date || !contents) {
+      alert("모든 항목을 입력해주세요.");
+      return false;
+    }
+    return true; // 끊어주기
+  };
   const formHandler = (event) => {
     event.preventDefault();
+    const isValid = validation();
+    if (!isValid) return; // 중괄호 생략, 끊어주는 부분
     const monthArray = date.split("-");
     const newItem = {
       id: uuidv4(),
@@ -58,8 +69,8 @@ const CashInput = () => {
       month: Number(monthArray[1]),
       contents,
     };
-    setClickMonth(newItem.month);
-    setCashArray((prev) => [...prev, newItem]);
+    dispatch(setMonth(newItem.month));
+    dispatch(addCashList(newItem));
   };
 
   const dateHandler = (event) => {
