@@ -14,13 +14,13 @@ const StLayout = styled.div`
   padding: 30px 0;
   box-sizing: border-box;
 `;
-const HomePage = ({ cashArray, setCashArray, clickMonth, setClickMonth }) => {
+const HomePage = () => {
   return (
     <>
       <StLayout>
-        <CashInput setCashArray={setCashArray} setClickMonth={setClickMonth} />
-        <Monthly setClickMonth={setClickMonth} clickMonth={clickMonth} />
-        <CashList cashArray={cashArray} clickMonth={clickMonth} />
+        <CashInput />
+        <Monthly />
+        <CashList />
       </StLayout>
     </>
   );

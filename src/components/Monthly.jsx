@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import { setMonth } from "../store/slices/cashBookSlice";
-// import { ContextProvider } from "../context/ContextProvider";
-// import { useContext } from "react";
 
 const StBtnBox = styled.div`
   display: grid;
@@ -27,10 +25,8 @@ const StBtn = styled.button`
 `;
 
 const Monthly = () => {
-  const dispatch = useDispatch(); // setclickMonth
+  const dispatch = useDispatch();
   const clickMonth = useSelector((state) => state.cashbook.month);
-  // clickMonth
-  // const { setClickMonth, clickMonth } = useContext(ContextProvider);
   const monthClickHandler = (num) => {
     dispatch(setMonth(num));
   };
@@ -43,8 +39,7 @@ const Monthly = () => {
             monthClickHandler(num);
           }}
           key={num}
-          // 이름 똑같이 줘서 그냥 냅둔거임
-          $active={num === clickMonth} //해당하는 월
+          $active={num === clickMonth}
         >
           {num}
         </StBtn>
