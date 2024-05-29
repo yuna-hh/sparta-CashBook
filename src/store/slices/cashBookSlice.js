@@ -6,7 +6,6 @@ export const cashBookSlice = createSlice({
   initialState,
   reducers: {
     setMonth: (state, action) => {
-      // month를 눌렀을때 그 값이 들어오게
       state.month = action.payload;
     },
     addCashList: (state, action) => {

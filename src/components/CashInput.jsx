@@ -4,8 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { addCashList, setMonth } from "../store/slices/cashBookSlice";
-// import { ContextProvider } from "../context/ContextProvider";
-// import { useContext } from "react";
 
 const Stform = styled.form`
   display: flex;
@@ -44,7 +42,6 @@ const Stform = styled.form`
 `;
 const CashInput = () => {
   const dispatch = useDispatch();
-  // const { setCashArray, setClickMonth } = useContext(ContextProvider);
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [contents, setContents] = useState("");
@@ -54,12 +51,12 @@ const CashInput = () => {
       alert("모든 항목을 입력해주세요.");
       return false;
     }
-    return true; // 끊어주기
+    return true;
   };
   const formHandler = (event) => {
     event.preventDefault();
     const isValid = validation();
-    if (!isValid) return; // 중괄호 생략, 끊어주는 부분
+    if (!isValid) return;
     const monthArray = date.split("-");
     const newItem = {
       id: uuidv4(),
