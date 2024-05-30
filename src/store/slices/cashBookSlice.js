@@ -1,5 +1,9 @@
 import { createSlice, isRejected } from "@reduxjs/toolkit";
-const initialState = { list: [], month: 1 };
+const getMonth = localStorage.getItem("month");
+// const getMonth = useEffect(() => {
+//   localStorage.getItem("month");
+// }, []);
+const initialState = { list: [], month: Number(getMonth) };
 
 export const cashBookSlice = createSlice({
   name: "cashBook",
