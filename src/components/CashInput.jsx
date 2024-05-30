@@ -67,6 +67,7 @@ const CashInput = () => {
       contents,
     };
     dispatch(setMonth(newItem.month));
+    localStorage.setItem("month", newItem.month);
     dispatch(addCashList(newItem));
   };
 

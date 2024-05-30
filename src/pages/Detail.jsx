@@ -1,9 +1,10 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { deleteCashList, editCashList } from "../store/slices/cashBookSlice";
+import { useRef } from "react";
 
 const StDetailBox = styled.div`
   width: 1200px;
@@ -69,25 +70,30 @@ const Detail = () => {
   const item = cashArray.find((item) => item.id === detailId);
   const { date, category, price, contents, id } = item;
 
-  const [detailDate, setDetailDate] = useState(date);
-  const [detailCategory, setDetailCategory] = useState(category);
-  const [detailPrice, setDetailPrice] = useState(price);
-  const [detailContents, setDetailContents] = useState(contents);
+  // const [detailDate, setDetailDate] = useState(date);
+  // const [detailCategory, setDetailCategory] = useState(category);
+  // const [detailPrice, setDetailPrice] = useState(price);
+  // const [detailContents, setDetailContents] = useState(contents);
+
+  const categoryRef = useRef(null);
+  const dateRef = useRef(null);
+  const priceRef = useRef(null);
+  const contentsRef = useRef(null);
 
   const handleEditeBtn = () => {
-    const monthArray = detailDate.split("-");
+    const monthArray = dateRef.current.value.split("-");
     const editItem = {
       id: id,
-      date: detailDate,
-      category: detailCategory,
-      price: detailPrice,
-      contents: detailContents,
+      date: dateRef.current.value,
+      category: categoryRef.current.value,
+      price: priceRef.current.value,
+      contents: contentsRef.current.value,
       month: Number(monthArray[1]),
     };
+    console.log(categoryRef.current.value); // 수정된 값
     dispatch(editCashList(editItem));
     navigate("/");
   };
-
   const handleDelteBtn = () => {
     dispatch(deleteCashList(detailId));
     navigate("/");
@@ -97,50 +103,38 @@ const Detail = () => {
     navigate("/");
   };
 
-  const handleDetailDate = (event) => {
-    setDetailDate(event.target.value);
-  };
-  const handleDetailCategory = (event) => {
-    setDetailCategory(event.target.value);
-    console.log(event.target.value);
-  };
-  const handleDetailPrice = (event) => {
-    setDetailPrice(event.target.value);
-  };
-  const handleDetailContent = (event) => {
-    setDetailContents(event.target.value);
-  };
+  // const handleDetailDate = (event) => {
+  //   setDetailDate(event.target.value);
+  // };
+  // const handleDetailCategory = (event) => {
+  //   setDetailCategory(categoryRef.current.value);
+  //   console.log(event.target.value);
+  // };
+  // const handleDetailPrice = (event) => {
+  //   setDetailPrice(event.target.value);
+  // };
+  // const handleDetailContent = (event) => {
+  //   setDetailContents(event.target.value);
+  // };
   return (
     <>
       <StDetailBox>
         <StDetaildiv>
           <div>
             <label htmlFor="date">날짜</label>
-            <input type="date" value={detailDate} onChange={handleDetailDate} />
+            <input type="date" defaultValue={date} ref={dateRef} />
           </div>
           <div>
             <label htmlFor="category">항목</label>
-            <input
-              type="text"
-              value={detailCategory}
-              onChange={handleDetailCategory}
-            />
+            <input type="text" defaultValue={category} ref={categoryRef} />
           </div>
           <div>
             <label htmlFor="price">금액</label>
-            <input
-              type="number"
-              value={detailPrice}
-              onChange={handleDetailPrice}
-            />
+            <input type="number" defaultValue={price} ref={priceRef} />
           </div>
           <div>
             <label htmlFor="content">내용</label>
-            <input
-              type="text"
-              value={detailContents}
-              onChange={handleDetailContent}
-            />
+            <input type="text" defaultValue={contents} ref={contentsRef} />
           </div>
           <StBtnWrap>
             <button onClick={handleEditeBtn}>수정</button>
